@@ -1,0 +1,196 @@
+{
+	"info": {
+		"_postman_id": "903349d0-bf16-4947-a771-8a1354dc70d7",
+		"name": "Aautomation Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17377556"
+	},
+	"item": [
+		{
+			"name": "Delete book",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"ID\" : \"9819991819862001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://rahulshettyacademy.com/Library/DeleteBook.php",
+					"protocol": "https",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"Library",
+						"DeleteBook.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get book",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://rahulshettyacademy.com/Library/GetBook.php?ID={{ID}}",
+					"protocol": "https",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"Library",
+						"GetBook.php"
+					],
+					"query": [
+						{
+							"key": "ID",
+							"value": "{{ID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add book",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let color = pm.variables.replaceIn(\"{{$randomColor}}\")\r",
+							"pm.collectionVariables.set(\"randomColor\",color)\r",
+							"\r",
+							"let month = pm.variables.replaceIn(\"{{$randomMonth}}\")\r",
+							"pm.collectionVariables.set(\"randomMonth\",month)\r",
+							"\r",
+							"let firstNamber = pm.variables.replaceIn(\"{{$randomInt}}\")\r",
+							"pm.collectionVariables.set(\"randomisbn\",firstNamber)\r",
+							"\r",
+							"let secondNamber = pm.variables.replaceIn(\"{{$randomInt}}\")\r",
+							"pm.collectionVariables.set(\"randomaisle\",secondNamber)\r",
+							"\r",
+							"let firstName = pm.variables.replaceIn(\"{{$randomFirstName}}\")\r",
+							"pm.collectionVariables.set(\"randomFirstName\",firstName)\r",
+							"\r",
+							"let lastName = pm.variables.replaceIn(\"{{$randomLastName}}\")\r",
+							"pm.collectionVariables.set(\"randomLastName\",lastName)\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let myresponse = pm.response.json()\r",
+							"\r",
+							"let idOfTheBook = myresponse.ID\r",
+							"pm.collectionVariables.set(\"ID\", idOfTheBook)\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\":\"{{randomColor}} {{randomMonth}}\",\r\n\"isbn\":\"{{randomisbn}}\",\r\n\"aisle\":\"{{randomaisle}}\",\r\n\"author\":\"{{randomFirstName}} {{randomLastName}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://rahulshettyacademy.com/Library/Addbook.php",
+					"protocol": "https",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"Library",
+						"Addbook.php"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "randomColor",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "randomMonth",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "randomisbn",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "randomaisle",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "randomFirstName",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "randomLastName",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "ID",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
